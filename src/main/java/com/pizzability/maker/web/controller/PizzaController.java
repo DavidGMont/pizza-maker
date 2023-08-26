@@ -4,10 +4,7 @@ import com.pizzability.maker.persistence.entity.PizzaEntity;
 import com.pizzability.maker.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +26,19 @@ public class PizzaController {
     @GetMapping("/{id}")
     public ResponseEntity<PizzaEntity> get(@PathVariable int id) {
         return ResponseEntity.ok(this.pizzaService.get(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<PizzaEntity> add(@RequestBody PizzaEntity pizza) {
+        return (pizza.getIdPizza() == null || !this.pizzaService.exists(pizza.getIdPizza()))
+                ? ResponseEntity.ok(this.pizzaService.save(pizza))
+                : ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<PizzaEntity> update(@RequestBody PizzaEntity pizza) {
+        return (pizza.getIdPizza() != null && this.pizzaService.exists(pizza.getIdPizza()))
+                ? ResponseEntity.ok(this.pizzaService.save(pizza))
+                : ResponseEntity.badRequest().build();
     }
 }
