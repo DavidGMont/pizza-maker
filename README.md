@@ -57,7 +57,7 @@ curso [Java Spring Security: Autenticación y Seguridad Web](https://platzi.com/
 
 ### Recursos útiles
 
-TBD
+- [Uso de `Text Blocks` para textos multilínea](https://www.delftstack.com/howto/java/java-multiline-strings/).
 
 ## 🙌 Agradecimientos
 
