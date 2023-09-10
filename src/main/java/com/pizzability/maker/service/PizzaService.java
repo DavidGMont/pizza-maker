@@ -3,12 +3,14 @@ package com.pizzability.maker.service;
 import com.pizzability.maker.persistence.entity.PizzaEntity;
 import com.pizzability.maker.persistence.repository.PizzaPagSortRepository;
 import com.pizzability.maker.persistence.repository.PizzaRepository;
+import com.pizzability.maker.service.dto.UpdatePizzaPriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -61,6 +63,11 @@ public class PizzaService {
 
     public void delete(int id) {
         this.pizzaRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updatePrice(UpdatePizzaPriceDTO dto) {
+        this.pizzaRepository.updatePrice(dto);
     }
 
     public boolean exists(int id) {

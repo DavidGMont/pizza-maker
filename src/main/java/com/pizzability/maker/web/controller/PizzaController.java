@@ -2,6 +2,7 @@ package com.pizzability.maker.web.controller;
 
 import com.pizzability.maker.persistence.entity.PizzaEntity;
 import com.pizzability.maker.service.PizzaService;
+import com.pizzability.maker.service.dto.UpdatePizzaPriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -72,6 +73,18 @@ public class PizzaController {
         return (pizza.getIdPizza() != null && this.pizzaService.exists(pizza.getIdPizza()))
                 ? ResponseEntity.ok(this.pizzaService.save(pizza))
                 : ResponseEntity.badRequest().build();
+    }
+
+    @PatchMapping("/price")
+    public ResponseEntity<Void> updatePrice(@RequestBody UpdatePizzaPriceDTO dto) {
+        ResponseEntity<Void> responseEntity;
+        if (this.pizzaService.exists(dto.getPizzaId())) {
+            this.pizzaService.updatePrice(dto);
+            responseEntity = ResponseEntity.ok().build();
+        } else {
+            responseEntity = ResponseEntity.badRequest().build();
+        }
+        return responseEntity;
     }
 
     @DeleteMapping("/{id}")
