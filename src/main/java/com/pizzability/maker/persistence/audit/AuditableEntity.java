@@ -1,4 +1,4 @@
-package com.pizzability.maker.persistence.entity;
+package com.pizzability.maker.persistence.audit;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
