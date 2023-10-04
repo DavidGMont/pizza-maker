@@ -1,13 +1,16 @@
 package com.pizzability.maker.persistence.audit;
 
+/*
 import com.pizzability.maker.persistence.entity.PizzaEntity;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PostUpdate;
 import jakarta.persistence.PreRemove;
 import org.springframework.util.SerializationUtils;
+ */
 
 public class AuditPizzaListener {
+    /*
     private PizzaEntity currentValue;
 
     @PostLoad
@@ -28,4 +31,5 @@ public class AuditPizzaListener {
     public void onPreDelete(PizzaEntity entity) {
         System.out.println(entity);
     }
+     */
 }
