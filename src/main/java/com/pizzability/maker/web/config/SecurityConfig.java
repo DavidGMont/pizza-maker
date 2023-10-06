@@ -23,10 +23,10 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         matcherRegistry -> matcherRegistry
-                                .requestMatchers(HttpMethod.GET, "/api/pizzas/**")
-                                .permitAll()
-                                .requestMatchers(HttpMethod.PUT)
-                                .denyAll()
+                                .requestMatchers(HttpMethod.GET, "/api/pizzas/**").hasAnyRole("ADMIN", "CUSTOMER")
+                                .requestMatchers(HttpMethod.POST, "/api/pizzas/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
+                                .requestMatchers("/api/orders/**").hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated())
                 .httpBasic(Customizer.withDefaults());
@@ -37,10 +37,16 @@ public class SecurityConfig {
     public UserDetailsService memoryUser() {
         UserDetails admin = User.builder()
                 .username("admin")
-                .password(passwordEncoder().encode("admin"))
+                .password(passwordEncoder().encode("admin7586"))
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(admin);
+
+        UserDetails customer = User.builder()
+                .username("customer")
+                .password(passwordEncoder().encode("customer1526"))
+                .roles("CUSTOMER")
+                .build();
+        return new InMemoryUserDetailsManager(admin, customer);
     }
 
     @Bean
