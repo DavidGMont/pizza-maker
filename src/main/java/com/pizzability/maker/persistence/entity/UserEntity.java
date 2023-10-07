@@ -1,12 +1,11 @@
 package com.pizzability.maker.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -29,4 +28,7 @@ public class UserEntity {
 
     @Column(columnDefinition = "TINYINT", nullable = false)
     private Boolean disabled;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<UserRoleEntity> roles;
 }
